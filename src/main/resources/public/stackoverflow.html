@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>StackOverFlow</title>
-</head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 <body ng-app="springApp">
 <div class="container" style="margin-top: 30px" ng-controller="AppCtrl">
     <div class="row">
@@ -23,7 +25,7 @@
                         </thead>
                         <tbody ng-repeat="item in websites">
                         <tr>
-                            <td>img ng-src={{item.iconImageUrl}}</td>
+                            <td><img ng-src="{{item.iconImageUrl}}"></td>
                             <td>{{item.id}}</td>
                             <td>{{item.website}}</td>
                             <td>{{item.title}}</td>
@@ -37,7 +39,7 @@
     </div>
 </div>
 
-<script src="js/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
