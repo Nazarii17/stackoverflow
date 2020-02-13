@@ -11,23 +11,23 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Websites StackOverFlow</div>
+                <div class="panel-heading"><h1>Websites Stack Overflow</h1></div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>icon</th>
-                            <th>id</th>
-                            <th>website</th>
-                            <th>title</th>
-                            <th>description</th>
+                            <th>Icon</th>
+                            <th>ID</th>
+                            <th>Website</th>
+                            <th>Title</th>
+                            <th>Description</th>
                         </tr>
                         </thead>
                         <tbody ng-repeat="item in websites">
                         <tr>
                             <td><img ng-src="{{item.iconImageUrl}}"></td>
                             <td>{{item.id}}</td>
-                            <td>{{item.website}}</td>
+                            <td><a href="{{item.website}}">{{item.website}}</a> </td>
                             <td>{{item.title}}</td>
                             <td>{{item.description}}</td>
                         </tr>
