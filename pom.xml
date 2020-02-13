@@ -37,7 +37,6 @@
             <version>1.4.0.RELEASE</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -74,6 +73,12 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
+        <!--        Factory apache httpcomponent-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
 
     </dependencies>
 
