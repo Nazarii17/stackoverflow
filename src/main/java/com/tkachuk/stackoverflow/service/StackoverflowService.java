@@ -1,55 +1,23 @@
 package com.tkachuk.stackoverflow.service;
 
 import com.tkachuk.stackoverflow.model.StackoverflowWebsite;
+import com.tkachuk.stackoverflow.repository.StackoverflowWebsiteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StackoverflowService {
 
-    private static List<StackoverflowWebsite> items = new ArrayList<>();
+    private final StackoverflowWebsiteRepository repository;
 
-    static {
-        items.add(new StackoverflowWebsite(
-                "stackoverflow",
-                "http://stackoverflow.com",
-                "http://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico",
-                "Stack Overflow",
-                "For programmers")
-        );
-        items.add(new StackoverflowWebsite(
-                "serverfault",
-                "http://serverfault.com",
-                "http://cdn.sstatic.net/Sites/serverfault/img/favicon.ico",
-                "Server Fault",
-                "For system administrators")
-        );
-        items.add(new StackoverflowWebsite(
-                "superuser",
-                "http://superuser.com",
-                "http://cdn.sstatic.net/Sites/superuser/img/favicon.ico",
-                "Super User",
-                "For computer enthusiasts")
-        );
-        items.add(new StackoverflowWebsite(
-                "askubuntu",
-                "http://askubuntu.com",
-                "http://cdn.sstatic.net/Sites/askubuntu/img/favicon.ico",
-                "Ask Ubuntu",
-                "For Ubuntu users")
-        );
-        items.add(new StackoverflowWebsite(
-                "wordpress",
-                "http://wordpress.com",
-                "http://cdn.sstatic.net/Sites/wordpress/img/favicon.ico",
-                "WordPress",
-                "For WordPress users")
-        );
+    @Autowired
+    public StackoverflowService(StackoverflowWebsiteRepository repository) {
+        this.repository = repository;
     }
 
     public List<StackoverflowWebsite> findAll() {
-        return items;
+        return repository.findAll();
     }
 }
