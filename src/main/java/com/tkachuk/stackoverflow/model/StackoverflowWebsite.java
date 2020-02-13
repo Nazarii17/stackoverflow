@@ -1,6 +1,7 @@
 package com.tkachuk.stackoverflow.model;
 
 import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
