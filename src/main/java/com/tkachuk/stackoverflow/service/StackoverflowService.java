@@ -18,11 +18,18 @@ public class StackoverflowService {
     private final StackoverflowWebsiteRepository repository;
     private final StackExchangeClient stackExchangeClient;
 
+    @Autowired
     public StackoverflowService(StackoverflowWebsiteRepository repository, StackExchangeClient stackExchangeClient) {
         this.repository = repository;
         this.stackExchangeClient = stackExchangeClient;
     }
 
+    /**
+     * Converts given not null SiteDto to StackoverflowWebsite
+     *
+     * @param input - SiteDto
+     * @return - StackoverflowWebsite
+     */
     private StackoverflowWebsite toStackoverflowWebsite(@NonNull SiteDto input) {
         return new StackoverflowWebsite(
                 input.getSite_url().substring("http:// ".length(), input.getSite_url().length() - ".com".length()),
@@ -41,7 +48,18 @@ public class StackoverflowService {
     public List<StackoverflowWebsite> findAll() {
         return stackExchangeClient.getSites().stream()
                 .map(this::toStackoverflowWebsite)
+                .filter(this::ignoreMeta)
                 .collect(collectingAndThen(toList(), ImmutableList::copyOf));
+    }
+
+    /**
+     * Checks stackoverflowWebsite, if id of the site hasn't "meta.", method returns true
+     *
+     * @param stackoverflowWebsite to parse
+     * @return true if ID of stackoverflowWebsite doesn't have "meta."
+     */
+    private boolean ignoreMeta(@NonNull StackoverflowWebsite stackoverflowWebsite) {
+        return !stackoverflowWebsite.getId().startsWith("meta.");
     }
 
     /**
