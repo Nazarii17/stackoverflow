@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Random;
 
 @RestController
-public class HealthService {
+public class HealthController {
     @RequestMapping("/health")
     public ResponseEntity<String> getStatus() {
         Random randomGenerator = new Random();
