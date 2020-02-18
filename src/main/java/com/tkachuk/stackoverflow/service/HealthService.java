@@ -1,5 +1,8 @@
 package com.tkachuk.stackoverflow.service;
 
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -7,7 +10,20 @@ import org.springframework.web.client.RestTemplate;
 public class HealthService {
     private RestTemplate restTemplate = new RestTemplate();
 
+    private int attempt;
+
+    public void clearAttempt() {
+        attempt = 0;
+    }
+
+    @Retryable(maxAttempts = 10, value = RuntimeException.class, backoff = @Backoff(delay = 500, multiplier = 2))
     public String getHealth() {
-        return restTemplate.getForObject("http://localhost:8083/health", String.class);
+        attempt++;
+        return restTemplate.getForObject("http://localhost:8083/health", String.class) + " - " + attempt;
+    }
+
+    @Recover
+    public String recover() {
+        return "Not OK!";
     }
 }

@@ -7,11 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthCheckController {
+    private final HealthService healthService;
+
     @Autowired
-    private HealthService healthService;
+    public HealthCheckController(HealthService healthService) {
+        this.healthService = healthService;
+    }
 
     @RequestMapping("/check")
     public String checkStatus() {
+        healthService.clearAttempt();
         return healthService.getHealth();
     }
 }
